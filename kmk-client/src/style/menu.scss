@@ -1,0 +1,38 @@
+@import "color";
+
+
+.menuGroupHeader {
+    margin: 10px;
+    font-weight: bold;
+}
+
+.menuItemGroup {
+    display: block;
+    background-color: $light-color;
+    border-width: 1px;
+    border-style: solid;
+    border-color: $dark-color;
+
+    .menuItem {
+        margin: 20px 0px;
+        padding: 10px;
+
+    }
+
+    a {
+        text-decoration: none;
+        color: $text-color;
+        display: flex;
+
+        .icon {
+            color: $theme-color;
+            font-size: x-large;
+            width: 50px;
+        }
+
+        .text {
+            margin: auto;
+            margin-left: 0px;
+        }
+    }
+}

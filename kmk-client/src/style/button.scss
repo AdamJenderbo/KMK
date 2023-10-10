@@ -1,0 +1,21 @@
+@import "color";
+
+.button {
+    background-color: $theme-color;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    width: calc(100% - 10px);
+    height: 32px;
+    font-weight: bold;
+    margin: 5px;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+button:disabled {
+    background-color: $button-color-disbaled;
+    cursor: auto;
+}

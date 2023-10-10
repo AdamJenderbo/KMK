@@ -1,0 +1,54 @@
+@import "color";
+
+.monthHeader {
+    border-radius: 12px;
+    background-color: $medium-dark-color;
+    color: $text-color;
+    margin: 10px;
+    padding: 10px;
+    font-weight: bold;
+}
+
+.event {
+    display: flex;
+    margin-bottom: 15px;
+    .date {
+        display: block;
+        text-align: center;
+
+        .day {
+            font-size: larger;
+            color: $text-color;
+            text-decoration: none;
+        }
+
+        .month {
+            color: $dark-color;
+            font-size: small;
+            text-decoration: none;
+        }
+    }
+
+    .name {
+        margin: auto;
+        margin-left: 20px;
+        color: $text-color;
+        font-size: medium;
+    }
+}
+
+
+.eventPage {
+    .date {
+        color: hsl(350, 87%, 55%);
+        font-size: large;
+        font-weight: bold;
+        margin: 5px;
+    }
+
+    .title {
+        font-size: xx-large;
+        font-weight: bold;
+        margin: 5px;
+    }
+}
