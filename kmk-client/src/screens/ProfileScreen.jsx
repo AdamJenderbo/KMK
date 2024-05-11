@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 const Profile = ({user}) => {
     return (
         <View style={styles.profile}>
-        <Image source={{ uri: user.picture.data.url }} style={styles.image} />
+        <Image source={{ uri: user.pictureUrl }} style={styles.image} />
         <Text style={styles.name}>{user.name}</Text>
         <Text>ID: {user.id}</Text>
       </View>);

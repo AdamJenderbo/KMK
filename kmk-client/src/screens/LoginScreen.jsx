@@ -1,13 +1,13 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { LoginButton, Settings } from 'react-native-fbsdk-next';
-import { onLogIn } from '../actions/authentication';
+import { login } from '../actions/authentication';
 import { connect } from 'react-redux';
 
 // // Ask for consent first if necessary
 // // Possibly only do this for iOS if no need to handle a GDPR-type flow
 Settings.initializeSDK();
 
-const LoginScreen = ({onLogIn}) => {
+const LoginScreen = ({login}) => {
     return (
         <View style={styles.container}>
             <View style={styles.textContainer}>
@@ -15,7 +15,7 @@ const LoginScreen = ({onLogIn}) => {
             </View>
             <View style={styles.content}>
                 <LoginButton
-                    onLoginFinished={onLogIn}
+                    onLoginFinished={login}
                     onLogoutFinished={() => console.log("logout.")}
                 />
             </View>
@@ -54,7 +54,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onLogIn: (error, data) => dispatch(onLogIn(error, data))
+        login: () => dispatch(login())
     }
 }
 

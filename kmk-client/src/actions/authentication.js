@@ -1,17 +1,14 @@
-import { AccessToken, GraphRequestManager, GraphRequest } from 'react-native-fbsdk-next';
+import { AccessToken } from 'react-native-fbsdk-next';
+import { apiPost } from './net';
 
-export const SET_ACCESS_TOKEN = "SET_ACCESS_TOKEN";
 export const SET_USER = "SET_USER";
 
-export function onLogIn(error, data) {
+export function login() {
     return async (dispatch) => {
         AccessToken.getCurrentAccessToken().then(async (data) => { 
             if(data.accessToken) {
-                dispatch({type: SET_ACCESS_TOKEN, payload: data.accessToken});
-
-                const response = await fetch(`https://graph.facebook.com/me?access_token=${data.accessToken}&fields=id,name,picture.type(large)`)
-
-                const user = await response.json();
+                
+                const user = await apiPost("user/login", {accessToken: data.accessToken});
 
                 dispatch({type: SET_USER, payload: user});
             }

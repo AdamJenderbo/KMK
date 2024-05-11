@@ -14,7 +14,7 @@ const Router = ({isLoggedIn}) => {
 
 const mapStateToProps = state => {
     return {
-        isLoggedIn: state.authentication.accessToken
+        isLoggedIn: state.authentication.user
     }
 }
 
