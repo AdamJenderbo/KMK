@@ -1,7 +1,11 @@
+using Kmk.Api.Application.Authentication;
+using Kmk.Api.Application.Authentication.Commands;
 using Kmk.Api.Application.Facebook;
 using Kmk.Api.Application.Users;
-using Kmk.Api.Application.Users.Commands;
+using Kmk.Api.Application.Users.Queries;
+using Kmk.Api.Infrastructure.Authentication;
 using Kmk.Persistence;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,7 +29,16 @@ builder.Services.AddCors(options =>
     });
 });
 
+
+builder.Services.ConfigureOptions<JwtOptionsSetup>();
+builder.Services.ConfigureOptions<JwtBearerOptionsSetup>();
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer();
+
 builder.Services.AddScoped<FacebookClient>();
+builder.Services.AddScoped<IJwtProvider, JwtProvider>();
+builder.Services.AddScoped<GetUsersQueryHandler>();
 builder.Services.AddScoped<LoginCommandHandler>();
 
 var app = builder.Build();
@@ -39,6 +52,7 @@ if (app.Environment.IsDevelopment())
 
 //app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 app.UseCors("default");

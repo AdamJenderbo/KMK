@@ -8,9 +8,11 @@ const StatusCode = {
     INTERNAL_SERVER_ERROR: 500
 }
 
-export async function apiGet(route) {
-    const options = {method: 'GET', url: `${baseUrl}/${route}`}
-    const response = await axios.request(options);
+export async function apiGet(token, route) {
+    const response = await axios.get(`${baseUrl}/${route}`, { 
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }});
     return response.data;
 }
 
@@ -19,7 +21,7 @@ export async function apiGet(route) {
 //     'Content-Type': 'application/json'
 // }
 
-export async function apiPost(route, body) {
+export async function apiPost(token, route, body) {
     const response = await axios.post(`${baseUrl}/${route}`, body).catch(function (error) {
         console.log("error");
         if (error.response) {
