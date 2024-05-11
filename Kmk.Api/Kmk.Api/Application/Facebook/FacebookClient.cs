@@ -1,4 +1,4 @@
-﻿using Kmk.Domain.Facebook;
+﻿using Kmk.Api.Domain.Facebook;
 using System.Text.Json;
 
 namespace Kmk.Api.Application.Facebook;

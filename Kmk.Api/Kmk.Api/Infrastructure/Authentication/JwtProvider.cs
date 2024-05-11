@@ -1,5 +1,5 @@
 ﻿using Kmk.Api.Application.Authentication;
-using Kmk.Domain.Users;
+using Kmk.Api.Domain.Users;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;

@@ -1,5 +1,5 @@
 ﻿using Kmk.Api.Application.Facebook;
-using Kmk.Domain.Users;
+using Kmk.Api.Domain.Users;
 using Kmk.Persistence;
 
 namespace Kmk.Api.Application.Authentication.Commands;

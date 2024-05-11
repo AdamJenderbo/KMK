@@ -1,7 +1,8 @@
 ﻿using Kmk.Api.Application.Authentication;
 using Kmk.Api.Application.Authentication.Commands;
 using Kmk.Api.Application.Users.Queries;
-using Kmk.Domain.Users;
+using Kmk.Api.Domain.Users;
+using Kmk.Api.Infrastructure.Authorization;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,7 +19,7 @@ public class UserController : ControllerBase
         => await commandHandler.Handle(request);
 
     [HttpGet]
-    [Authorize]
+    [HasRole(Role.Admin)]
     public List<User> GetUsers([FromServices] GetUsersQueryHandler queryHandler)
         => queryHandler.Handle(new GetUsersQuery());
 }

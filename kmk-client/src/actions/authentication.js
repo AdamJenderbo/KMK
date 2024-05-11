@@ -11,8 +11,10 @@ export function login() {
         AccessToken.getCurrentAccessToken().then(async (data) => { 
             if(data.accessToken) {
                 
+                console.log("login")
                 const response = await apiPost("user/login", {accessToken: data.accessToken});
 
+                
                 if(!response.isSuccess) {
                     logout();
                     return;

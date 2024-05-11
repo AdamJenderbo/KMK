@@ -4,8 +4,10 @@ using Kmk.Api.Application.Facebook;
 using Kmk.Api.Application.Users;
 using Kmk.Api.Application.Users.Queries;
 using Kmk.Api.Infrastructure.Authentication;
+using Kmk.Api.Infrastructure.Authorization;
 using Kmk.Persistence;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,10 +38,15 @@ builder.Services.ConfigureOptions<JwtBearerOptionsSetup>();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer();
 
+builder.Services.AddAuthorization();
+builder.Services.AddSingleton<IAuthorizationHandler, RoleAuthorizationHandler>();
+builder.Services.AddSingleton<IAuthorizationPolicyProvider, RoleAuthorizationPolicyProvider>();
+
 builder.Services.AddScoped<FacebookClient>();
 builder.Services.AddScoped<IJwtProvider, JwtProvider>();
 builder.Services.AddScoped<GetUsersQueryHandler>();
 builder.Services.AddScoped<LoginCommandHandler>();
+builder.Services.AddScoped<UserService>();
 
 var app = builder.Build();
 

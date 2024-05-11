@@ -1,4 +1,4 @@
-﻿using Kmk.Domain.Users;
+﻿using Kmk.Api.Domain.Users;
 
 namespace Kmk.Api.Application.Authentication;
 

@@ -1,4 +1,4 @@
-﻿using Kmk.Domain.Users;
+﻿using Kmk.Api.Domain.Users;
 using Kmk.Persistence;
 
 namespace Kmk.Api.Application.Users.Queries;

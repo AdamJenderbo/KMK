@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Kmk.Domain.Facebook;
+namespace Kmk.Api.Domain.Facebook;
 
 public class Picture
 {

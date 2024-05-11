@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Kmk.Api.Infrastructure.Authentication;
 
-public class JwtBearerOptionsSetup : IPostConfigureOptions<JwtBearerOptions>
+public class JwtBearerOptionsSetup : IConfigureNamedOptions<JwtBearerOptions>
 {
     private readonly JwtOptions _jwtOptions;
 
@@ -14,11 +14,28 @@ public class JwtBearerOptionsSetup : IPostConfigureOptions<JwtBearerOptions>
         _jwtOptions = jwtOptions.Value;
     }
 
-    public void PostConfigure(string? name, JwtBearerOptions options)
+    public void Configure(string? name, JwtBearerOptions options)
     {
         options.TokenValidationParameters.ValidIssuer = _jwtOptions.Issuer;
         options.TokenValidationParameters.ValidAudience = _jwtOptions.Audience;
         options.TokenValidationParameters.IssuerSigningKey =
             new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtOptions.SecretKey));
     }
+
+    public void Configure(JwtBearerOptions options)
+    {
+        options.TokenValidationParameters.ValidIssuer = _jwtOptions.Issuer;
+        options.TokenValidationParameters.ValidAudience = _jwtOptions.Audience;
+        options.TokenValidationParameters.IssuerSigningKey =
+            new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtOptions.SecretKey));
+    }
+
+    //public void PostConfigure(string? name, JwtBearerOptions options)
+    //{
+    //    options.TokenValidationParameters.ValidIssuer = _jwtOptions.Issuer;
+    //    options.TokenValidationParameters.ValidAudience = _jwtOptions.Audience;
+    //    options.TokenValidationParameters.IssuerSigningKey =
+    //        new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtOptions.SecretKey));
+    //}
+
 }

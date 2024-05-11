@@ -12,7 +12,8 @@ export async function apiGet(token, route) {
     const response = await axios.get(`${baseUrl}/${route}`, { 
         headers: {
             'Authorization': `Bearer ${token}`
-        }});
+        }
+    });
     return response.data;
 }
 
@@ -21,7 +22,7 @@ export async function apiGet(token, route) {
 //     'Content-Type': 'application/json'
 // }
 
-export async function apiPost(token, route, body) {
+export async function apiPost(route, body) {
     const response = await axios.post(`${baseUrl}/${route}`, body).catch(function (error) {
         console.log("error");
         if (error.response) {
@@ -33,11 +34,6 @@ export async function apiPost(token, route, body) {
         }
     });
     
-    if(response.status == StatusCode.INTERNAL_SERVER_ERROR) {
-        console.error("internal server error");
-        return;
-    }
-
     return response.data;
 }
 

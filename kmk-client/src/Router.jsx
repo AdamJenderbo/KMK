@@ -7,7 +7,7 @@ import SearchUserScreen from './screens/SearchUserScreen';
 
 const Router = ({isLoggedIn, loadUser}) => {
 
-    loadUser();
+    // loadUser();
 
     return (
         <View>
