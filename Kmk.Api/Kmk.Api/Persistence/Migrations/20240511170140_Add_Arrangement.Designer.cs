@@ -3,6 +3,7 @@ using Kmk.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Kmk.Api.Migrations
 {
     [DbContext(typeof(KmkContext))]
-    partial class KmkContextModelSnapshot : ModelSnapshot
+    [Migration("20240511170140_Add_Arrangement")]
+    partial class Add_Arrangement
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,7 +43,7 @@ namespace Kmk.Api.Migrations
 
                     b.HasKey("SerialNumber");
 
-                    b.ToTable("Arrangement");
+                    b.ToTable("Arrangements");
                 });
 
             modelBuilder.Entity("Kmk.Api.Domain.Users.User", b =>

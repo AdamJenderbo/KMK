@@ -1,15 +1,15 @@
-import { SET_USERS } from "../actions/user";
+import { SET_ARRANGEMENTS } from "../actions/arrangement";
 
 const initialState = {
-    users: []
+    arrangements: []
 }
 
 function reducer(state = initialState, action) {
     switch(action.type) {
-        case SET_USERS:
+        case SET_ARRANGEMENTS:
             return {
                 ...state, 
-                users: action.payload
+                arrangements: action.payload
             };
         default: 
             return state;
@@ -17,4 +17,3 @@ function reducer(state = initialState, action) {
 }
 
 export default reducer;
-

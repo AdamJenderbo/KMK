@@ -1,3 +1,5 @@
+using Kmk.Api.Application.Arrangements.Commands;
+using Kmk.Api.Application.Arrangements.Queries;
 using Kmk.Api.Application.Authentication;
 using Kmk.Api.Application.Authentication.Commands;
 using Kmk.Api.Application.Facebook;
@@ -32,20 +34,32 @@ builder.Services.AddCors(options =>
 });
 
 
+// Authentication
 builder.Services.ConfigureOptions<JwtOptionsSetup>();
 builder.Services.ConfigureOptions<JwtBearerOptionsSetup>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer();
 
+builder.Services.AddScoped<IJwtProvider, JwtProvider>();
+
+// Authorization
 builder.Services.AddAuthorization();
 builder.Services.AddSingleton<IAuthorizationHandler, RoleAuthorizationHandler>();
 builder.Services.AddSingleton<IAuthorizationPolicyProvider, RoleAuthorizationPolicyProvider>();
 
+// Clients
 builder.Services.AddScoped<FacebookClient>();
-builder.Services.AddScoped<IJwtProvider, JwtProvider>();
-builder.Services.AddScoped<GetUsersQueryHandler>();
+
+// Commands
 builder.Services.AddScoped<LoginCommandHandler>();
+builder.Services.AddScoped<CreateArrangementCommandHandler>();
+
+// Queries
+builder.Services.AddScoped<GetArrangementsQueryHandler>();
+builder.Services.AddScoped<GetUsersQueryHandler>();
+
+// Services
 builder.Services.AddScoped<UserService>();
 
 var app = builder.Build();
@@ -59,8 +73,9 @@ if (app.Environment.IsDevelopment())
 
 //app.UseHttpsRedirection();
 
-app.UseAuthentication();
-app.UseAuthorization();
+//app.UseAuthentication();
+//app.UseAuthorization();
+
 app.MapControllers();
 app.UseCors("default");
 

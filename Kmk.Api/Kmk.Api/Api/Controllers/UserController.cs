@@ -19,7 +19,6 @@ public class UserController : ControllerBase
         => await commandHandler.Handle(request);
 
     [HttpGet]
-    [HasRole(Role.Admin)]
     public List<User> GetUsers([FromServices] GetUsersQueryHandler queryHandler)
         => queryHandler.Handle(new GetUsersQuery());
 }

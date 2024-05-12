@@ -8,12 +8,14 @@
 
 import { configureStore } from '@reduxjs/toolkit'
 
+import arrangementReducer from '../reducers/arrangementReducer'
 import authenticationReducer from '../reducers/authenticationReducer'
 import userReducer from '../reducers/userReducer'
 
 export const store = configureStore({
-  reducer: {
-    authentication: authenticationReducer,
-    user: userReducer
-  }
+	reducer: {
+		arrangement: arrangementReducer,
+		authentication: authenticationReducer,
+		user: userReducer
+	}
 })
