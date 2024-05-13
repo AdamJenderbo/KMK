@@ -5,16 +5,17 @@ import { ArrangementStack } from './ArrangementStack';
 import { UserStack } from './UserStack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import LoginScreen from '../screens/LoginScreen';
 
 const Tab = createBottomTabNavigator();
 
 const Router = ({isLoggedIn, loadUser}) => {
 
-    // loadUser();
+    loadUser();
 
     return (
         <NavigationContainer>
-            {/*!isLoggedIn ? <LoginScreen/> :*/ 
+            {!isLoggedIn ? <LoginScreen /> :
                 <Tab.Navigator>
                     <Tab.Screen 
                         name="ArrangementStack" 

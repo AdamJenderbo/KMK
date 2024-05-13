@@ -1,13 +1,13 @@
-import { sendRequest } from "./net";
+import { apiPost } from "./net";
 
 export const SET_ARRANGEMENTS = "SET_ARRANGEMENTS";
 
 export function getArrangements() {
     return async (dispatch) => {
-        const arrangements = await sendRequest("arrangement/get", {
+        const arrangements = await dispatch(apiPost("arrangement/get", {
             sorting: "",
             filter: ""
-        });
+        }));
 
         dispatch({type: SET_ARRANGEMENTS, payload: arrangements});
 
@@ -17,13 +17,10 @@ export function getArrangements() {
 
 export function createArrangement(arrangement) {
     return async (dispatch) => {
-
-
-        console.log(arrangement);
-        const response = await sendRequest("arrangement/create", {
+        const response = await dispatch(apiPost("arrangement/create", {
             ...arrangement, 
             serialNumber: parseInt(arrangement.serialNumber)
-        });
+        }));
     
         return response;
     }

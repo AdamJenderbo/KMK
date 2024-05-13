@@ -1,4 +1,4 @@
-const baseUrl = 'https://ab54-81-235-135-70.ngrok-free.app/api';
+const baseUrl = 'https://f2e1-81-235-135-70.ngrok-free.app/api';
 
 // const baseUrl = "https://pokeapi.co/api/v2";
 
@@ -6,10 +6,6 @@ import axios from "axios";
 
 const StatusCode = {
     INTERNAL_SERVER_ERROR: 500
-}
-
-export async function sendRequest(request, body) {
-    return await apiPost(request, body);
 }
 
 export async function apiGet(route) {
@@ -22,20 +18,31 @@ export async function apiGet(route) {
 //     'Content-Type': 'application/json'
 // }
 
-export async function apiPost(route, body) {
-    const response = await axios.post(`${baseUrl}/${route}`, body).catch(function (error) {
-        console.log("error");
-        if (error.response) {
-            console.log(error.response)
+export function apiPost(route, body) {
+    return async (_, getState) => {
 
-        } else if (error.request) {
-            console.log(error.request)
-        } else {
+        const token = getState().authentication.token;
 
-        }
-    });
-    
-    return response.data;
+        const config = token ? { 
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        } : {}
+
+        const response = await axios.post(`${baseUrl}/${route}`, body, config).catch(function (error) {
+            console.log("error");
+            if (error.response) {
+                console.log(error.response)
+
+            } else if (error.request) {
+                console.log(error.request)
+            } else {
+
+            }
+        });
+
+        return response.data;
+    }
 }
 
 export async function apiPut(route, body) {

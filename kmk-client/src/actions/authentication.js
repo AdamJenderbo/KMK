@@ -8,12 +8,11 @@ export const LOADED_USER = "LOADED_USER";
 
 export function login() {
     return async (dispatch) => {
-        AccessToken.getCurrentAccessToken().then(async (data) => { 
+        AccessToken.getCurrentAccessToken().then(async (data) => {
+
             if(data.accessToken) {
                 
-                console.log("login")
-                const response = await apiPost("user/login", {accessToken: data.accessToken});
-
+                const response = dispatch(apiPost(undefined, "user/login", {accessToken: data.accessToken}));
                 
                 if(!response.isSuccess) {
                     logout();

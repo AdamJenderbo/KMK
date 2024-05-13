@@ -22,7 +22,7 @@ public class ArrangementController : ControllerBase
 
     [HttpPost]
     [Route("create")]
-    //[HasRole(Role.Arrangement)]
+    [HasRole(Role.Arrangement)]
     public CreateArrangementResponse CreateArrangement(
         CreateArrangementCommand request, 
         [FromServices] CreateArrangementCommandHandler commandHandler)

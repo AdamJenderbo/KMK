@@ -7,7 +7,7 @@ import { Screen } from '../actions/screen';
 const SearchArrangementScreen = ({
     arrangements,
     getArrangements,
-    navigation 
+    navigation
 }) => {
 
     useEffect(() => {
@@ -24,7 +24,7 @@ const SearchArrangementScreen = ({
     return (
         <View style={styles.container}>
             <Button title='Skapa arrangemang' onPress={onPressCreateArrangement}></Button>
-            {arrangements.map(x => <Text>{x.title}</Text>)}
+            {arrangements.map(x => <Text key={x.serialNumber}>{x.title}</Text>)}
         </View>
     );
 };
@@ -36,7 +36,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
     return {
-        arrangements: state.arrangement.arrangements
+        arrangements: state.arrangement.arrangements,
+        token: state.authentication.token
     }
 }
 

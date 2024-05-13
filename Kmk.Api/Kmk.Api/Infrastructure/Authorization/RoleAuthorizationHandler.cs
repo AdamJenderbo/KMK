@@ -16,7 +16,7 @@ public class RoleAuthorizationHandler : AuthorizationHandler<RoleRequirement>
 
     protected override async Task HandleRequirementAsync(AuthorizationHandlerContext context, RoleRequirement requirement)
     {
-        var claim = context.User.Claims.FirstOrDefault(x => x.Type == JwtRegisteredClaimNames.Sub);
+        var claim = context.User.Claims.FirstOrDefault(x => x.Type == "id");
 
         string? userId = claim?.Value;
 
@@ -29,7 +29,7 @@ public class RoleAuthorizationHandler : AuthorizationHandler<RoleRequirement>
 
         User user = userService.GetUser(userId);
 
-        if (user.HasRole(requirement.Role))
+        if (user.HasRole(Role.Admin) || user.HasRole(requirement.Role))
             context.Succeed(requirement);
     }
 }
